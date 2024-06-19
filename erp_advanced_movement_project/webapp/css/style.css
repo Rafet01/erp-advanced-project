@@ -1,41 +1,77 @@
-/* Enter your custom styles here */
-.myAppHeader {
-  background-color: #f8f9fa;
-  padding: 10px;
+.button-spacing {
+  margin-left: 10px;
+}
+.detailContainer {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
 }
 
-/* Specifieke component styling */
-.myCustomButton .sapMBtn {
-  background-color: #ff5733;
-  color: white;
+.detailTitle {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 16px;
 }
 
-/* Overwrite van standaard thema's */
-.sapMPage {
-  background-color: #ffffff;
+.detailField {
+  margin-bottom: 8px;
 }
 
-/* Responsieve design */
-@media only screen and (max-width: 600px) {
-  .myAppHeader {
-    background-color: #333333;
-  }
+.itemsContainer {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
 }
 
-/* Aangepaste stijlen voor Horizon thema */
-.sapHorizonContent {
-  font-family: "72", sans-serif;
-  font-size: 1rem;
-  color: #32363a;
+.itemsTitle {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.myCustomButton .sapMBtn {
-  background-color: #007aff;
-  border-radius: 4px;
-  color: white;
+.detailItemId {
+  font-weight: bold;
+  flex: 1;
 }
 
-/* Specifieke stijl voor een UI5-tabel */
-.myCustomTable .sapMList {
-  border: 1px solid #e0e0e0;
+.detailMatnr {
+  text-align: center;
+  flex: 1;
+}
+
+.detailUmziz {
+  text-align: right;
+  flex: 1;
+}
+
+.itemsListDetail {
+  width: 100%;
+}
+
+.itemContainer {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.sapMTextBold {
+  font-weight: bold;
+}
+
+.sapMTextAlignCenter {
+  text-align: center;
+}
+
+.sapMTextAlignRight {
+  text-align: right;
+}
+
+.itemContainer {
+  padding: 8px;
+  border-bottom: 1px solid #ccc;
 }

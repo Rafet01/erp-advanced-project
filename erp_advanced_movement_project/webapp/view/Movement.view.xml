@@ -7,17 +7,19 @@
     <SplitApp id="splitApp">
         <masterPages>
             <Page id="masterPage" title="Movement">
-                <VBox>
-                    <HBox justifyContent="SpaceBetween">
+                <VBox class="sapUiSmallMargin">
+                    <HBox justifyContent="SpaceBetween" class="sapUiTinyMarginBottom">
                         <Button text="Create Movement" press="onOpenCreateMovementDialog" type="Emphasized"/>
                     </HBox>
-                    <Select id="filterTypeSelect" change="onFilterChange">
-                        <core:Item key="" text="Filter by Type" />
-                        <core:Item key="IN" text="IN" />
-                        <core:Item key="OUT" text="OUT" />
-                        <core:Item key="I/O" text="I/O" />
-                    </Select>
-                    <DatePicker id="dateFilter" placeholder="Filter by Date" change="onFilterChange" />
+                    <VBox class="sapUiTinyMarginBottom">
+                        <Select id="filterTypeSelect" change="onFilterChange" class="sapUiTinyMarginBottom">
+                            <core:Item key="" text="Filter by Type" />
+                            <core:Item key="IN" text="IN" />
+                            <core:Item key="OUT" text="OUT" />
+                            <core:Item key="I/O" text="I/O" />
+                        </Select>
+                        <DatePicker id="dateFilter" placeholder="Filter by Date" change="onFilterChange" />
+                    </VBox>
                     <List
                         id="entryList"
                         mode="SingleSelectMaster"
@@ -34,25 +36,31 @@
         <detailPages>
             <Page id="detailPage" title="Movement Details">
                 <content>
-                    <VBox>
-                        <HBox>
-                            <Button text="Edit" press="onOpenEditMovementDialog" />
-                            <Button text="Delete" press="onOpenConfirmDeleteDialog" />
-                            <Button text="Add Item" press="onOpenAddItemDialog" />
+                    <VBox class="sapUiSmallMargin">
+                        <HBox justifyContent="End" class="sapUiTinyMarginBottom">
+                            <Button text="Edit" press="onOpenEditMovementDialog" width="120px" class="button-spacing"/>
+                            <Button text="Delete" press="onOpenConfirmDeleteDialog" type="Negative" width="120px" class="button-spacing"/>
+                            <Button text="Add Item" press="onOpenAddItemDialog" type="Emphasized" width="120px" class="button-spacing"/>
                         </HBox>
-                        <VBox class="BodyBox">
-                            <Text id="detailType" text="Type: {Type}"/>
-                            <Text id="detailMovDate" text="Date: {path: 'MovDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" />
-                            <Text id="detailPartner" text="Partner: {Partner}"/>
-                            <Text id="detailLocation" text="Location: {Location}" />
-                            <Text id="detailFinished" text="Finished: {= ${Finished} ? 'Yes' : 'No'}" />
-                            <Text id="detailChanges" text="Last changed by {ChgUser} on {path: 'ChgDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" class="detailChanges"/>
+                        <VBox class="detailContainer">
+                            <Text id="detailType" text="Movement ID: {Id}" class="detailTitle"/>
+                            <Text id="detailMovDate" text="Date: {path: 'MovDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" class="detailField"/>
+                            <Text id="detailPartner" text="Partner: {Partner}" class="detailField"/>
+                            <Text id="detailLocation" text="Location: {Location}" class="detailField"/>
+                            <Text id="detailFinished" text="Finished: {= ${Finished} ? 'Yes' : 'No'}" class="detailField"/>
+                            <Text id="detailChanges" text="Last changed by {ChgUser} on {path: 'ChgDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" class="detailField detailChanges"/>
                         </VBox>
-                        <VBox class="ItemsBox">
-                            <Text class="itemsTitle" text="Items: "/>
-                            <List id="itemsListDetail" items="{/MovementItemSet}">
-                                <StandardListItem title="Item ID {ItemId} Material Number{Matnr}" info="{Umziz} {Meins}" />
-                            </List>
+                        <VBox class="itemsContainer">
+                            <Text class="itemsTitle" text="Items:" />
+ <List id="itemsListDetail" items="{/MovementItemSet}">
+    <CustomListItem>
+        <HBox >
+            <Text text="Item ID {ItemId}"  class="sapUiSmallMarginBottom" wrapping="false"/>
+            <Text text="Material Number {Matnr}" class="sapUiSmallMarginBottom sapMTextAlignCenter"/>
+            <Text text="{Umziz} {Meins}" class="detailUmziz"/>
+        </HBox>
+    </CustomListItem>
+</List>
                         </VBox>
                     </VBox>
                 </content>
@@ -63,7 +71,7 @@
     <!-- Create Movement Dialog Fragment -->
     <Dialog id="createMovementDialog" title="Create Movement">
         <content>
-            <VBox>
+            <VBox class="sapUiSmallMargin">
                 <Label text="ID" />
                 <Input id="idInput" placeholder="ID (max 4 digits)" />
 
@@ -92,7 +100,7 @@
             </VBox>
         </content>
         <buttons>
-            <Button text="Create" press="onCreateMovement" />
+            <Button text="Create" press="onCreateMovement" type="Emphasized"/>
             <Button text="Cancel" press="onCloseCreateMovementDialog" />
         </buttons>
     </Dialog>
@@ -100,7 +108,7 @@
     <!-- Edit Movement Dialog Fragment -->
     <Dialog id="editMovementDialog" title="Edit Movement">
         <content>
-            <VBox>
+            <VBox class="sapUiSmallMargin">
                 <Label text="ID" />
                 <Input id="editIdInput" placeholder="ID (max 4 digits)" editable="false"/>
 
@@ -129,7 +137,7 @@
             </VBox>
         </content>
         <buttons>
-            <Button text="Save" press="onSaveEditedMovement" />
+            <Button text="Save" press="onSaveEditedMovement" type="Emphasized"/>
             <Button text="Cancel" press="onCloseEditMovementDialog" />
         </buttons>
     </Dialog>
@@ -137,10 +145,10 @@
     <!-- Confirm Delete Dialog Fragment -->
     <Dialog id="confirmDeleteDialog" title="Confirm Delete">
         <content>
-            <Text text="Are you sure you want to delete this movement?" />
+            <Text text="Are you sure you want to delete this movement?" class="sapUiSmallMargin"/>
         </content>
         <buttons>
-            <Button text="Yes" press="onConfirmDelete" />
+            <Button text="Yes" press="onConfirmDelete" type="Emphasized"/>
             <Button text="Cancel" press="onCloseConfirmDeleteDialog" />
         </buttons>
     </Dialog>
@@ -148,7 +156,7 @@
     <!-- Add Item Dialog Fragment -->
     <Dialog id="addItemDialog" title="Add Item">
         <content>
-            <VBox>
+            <VBox class="sapUiSmallMargin">
                 <Label text="Movement ID" />
                 <Input id="itemMovIdInput" editable="false" />
 
@@ -166,7 +174,7 @@
             </VBox>
         </content>
         <buttons>
-            <Button text="Create" press="onCreateItem" />
+            <Button text="Create" press="onCreateItem" type="Emphasized"/>
             <Button text="Cancel" press="onCloseAddItemDialog" />
         </buttons>
     </Dialog>
