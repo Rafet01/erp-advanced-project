@@ -1,0 +1,76 @@
+{
+  "configurations": [
+    {
+      "name": "Start erp_advanced_movement_project",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "npx",
+      "cwd": "${workspaceFolder}/erp_advanced_movement_project",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": ["fiori", "run"],
+      "args": [
+        "--open",
+        "test/flpSandbox.html#erpadvancedmovementproject-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "DEBUG": "--inspect",
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=238&sap-ui-xx-viewCache=false"
+      }
+    },
+    {
+      "name": "Start erp_advanced_movement_project Mock",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/erp_advanced_movement_project",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": ["fiori", "run"],
+      "args": [
+        "--config",
+        "./ui5-mock.yaml",
+        "--open",
+        "test/flpSandbox.html#erpadvancedmovementproject-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=238&sap-ui-xx-viewCache=false"
+      }
+    },
+    {
+      "name": "Start erp_advanced_movement_project Local",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/erp_advanced_movement_project",
+      "runtimeExecutable": "npx",
+      "windows": {
+        "runtimeExecutable": "npx.cmd"
+      },
+      "runtimeArgs": ["fiori", "run"],
+      "args": [
+        "--config",
+        "./ui5-local.yaml",
+        "--open",
+        "test/flpSandbox.html#erpadvancedmovementproject-display"
+      ],
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart",
+      "outputCapture": "std",
+      "port": 9229,
+      "env": {
+        "FIORI_TOOLS_URL_PARAMS": "sap-client=238&sap-ui-xx-viewCache=false"
+      }
+    }
+  ],
+  "compounds": []
+}

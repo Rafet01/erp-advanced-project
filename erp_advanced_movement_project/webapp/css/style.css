@@ -1,0 +1,41 @@
+/* Enter your custom styles here */
+.myAppHeader {
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+/* Specifieke component styling */
+.myCustomButton .sapMBtn {
+  background-color: #ff5733;
+  color: white;
+}
+
+/* Overwrite van standaard thema's */
+.sapMPage {
+  background-color: #ffffff;
+}
+
+/* Responsieve design */
+@media only screen and (max-width: 600px) {
+  .myAppHeader {
+    background-color: #333333;
+  }
+}
+
+/* Aangepaste stijlen voor Horizon thema */
+.sapHorizonContent {
+  font-family: "72", sans-serif;
+  font-size: 1rem;
+  color: #32363a;
+}
+
+.myCustomButton .sapMBtn {
+  background-color: #007aff;
+  border-radius: 4px;
+  color: white;
+}
+
+/* Specifieke stijl voor een UI5-tabel */
+.myCustomTable .sapMList {
+  border: 1px solid #e0e0e0;
+}

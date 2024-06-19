@@ -1,0 +1,173 @@
+<mvc:View
+    controllerName="erpadvancedmovementproject.controller.Movement"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <SplitApp id="splitApp">
+        <masterPages>
+            <Page id="masterPage" title="Movement">
+                <VBox>
+                    <HBox justifyContent="SpaceBetween">
+                        <Button text="Create Movement" press="onOpenCreateMovementDialog" type="Emphasized"/>
+                    </HBox>
+                    <Select id="filterTypeSelect" change="onFilterChange">
+                        <core:Item key="" text="Filter by Type" />
+                        <core:Item key="IN" text="IN" />
+                        <core:Item key="OUT" text="OUT" />
+                        <core:Item key="I/O" text="I/O" />
+                    </Select>
+                    <DatePicker id="dateFilter" placeholder="Filter by Date" change="onFilterChange" />
+                    <List
+                        id="entryList"
+                        mode="SingleSelectMaster"
+                        items="{/MovementSet}"
+                        selectionChange="onSelectionChange">
+                        <StandardListItem
+                            title="{Id}"
+                            description="{Type}"
+                            info="{Location}" />
+                    </List>
+                </VBox>
+            </Page>
+        </masterPages>
+        <detailPages>
+            <Page id="detailPage" title="Movement Details">
+                <content>
+                    <VBox>
+                        <HBox>
+                            <Button text="Edit" press="onOpenEditMovementDialog" />
+                            <Button text="Delete" press="onOpenConfirmDeleteDialog" />
+                            <Button text="Add Item" press="onOpenAddItemDialog" />
+                        </HBox>
+                        <VBox class="BodyBox">
+                            <Text id="detailType" text="Type: {Type}"/>
+                            <Text id="detailMovDate" text="Date: {path: 'MovDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" />
+                            <Text id="detailPartner" text="Partner: {Partner}"/>
+                            <Text id="detailLocation" text="Location: {Location}" />
+                            <Text id="detailFinished" text="Finished: {= ${Finished} ? 'Yes' : 'No'}" />
+                            <Text id="detailChanges" text="Last changed by {ChgUser} on {path: 'ChgDate', type: 'sap.ui.model.type.Date', formatOptions: {style: 'medium'}}" class="detailChanges"/>
+                        </VBox>
+                        <VBox class="ItemsBox">
+                            <Text class="itemsTitle" text="Items: "/>
+                            <List id="itemsListDetail" items="{/MovementItemSet}">
+                                <StandardListItem title="Item ID {ItemId} Material Number{Matnr}" info="{Umziz} {Meins}" />
+                            </List>
+                        </VBox>
+                    </VBox>
+                </content>
+            </Page>
+        </detailPages>
+    </SplitApp>
+
+    <!-- Create Movement Dialog Fragment -->
+    <Dialog id="createMovementDialog" title="Create Movement">
+        <content>
+            <VBox>
+                <Label text="ID" />
+                <Input id="idInput" placeholder="ID (max 4 digits)" />
+
+                <Label text="Type" />
+                <Select id="typeSelect">
+                    <core:Item key="IN" text="IN" />
+                    <core:Item key="OUT" text="OUT" />
+                    <core:Item key="I/O" text="I/O" />
+                </Select>
+
+                <Label text="Date" />
+                <DatePicker id="datePicker" placeholder="Date" />
+
+                <Label text="Partner" />
+                <Input id="partnerInput" placeholder="Partner" />
+
+                <Label text="Location" />
+                <Select id="locationSelect">
+                    <core:Item key="NOORD" text="NOORD" />
+                    <core:Item key="ELLER" text="ELLER" />
+                    <core:Item key="VIADU" text="VIADU" />
+                    <core:Item key="LICHT" text="LICHT" />
+                </Select>
+
+                <CheckBox id="finishedCheckBox" text="Finished" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Create" press="onCreateMovement" />
+            <Button text="Cancel" press="onCloseCreateMovementDialog" />
+        </buttons>
+    </Dialog>
+
+    <!-- Edit Movement Dialog Fragment -->
+    <Dialog id="editMovementDialog" title="Edit Movement">
+        <content>
+            <VBox>
+                <Label text="ID" />
+                <Input id="editIdInput" placeholder="ID (max 4 digits)" editable="false"/>
+
+                <Label text="Type" />
+                <Select id="editTypeSelect">
+                    <core:Item key="IN" text="IN" />
+                    <core:Item key="OUT" text="OUT" />
+                    <core:Item key="I/O" text="I/O" />
+                </Select>
+
+                <Label text="Date" />
+                <DatePicker id="editDatePicker" placeholder="Date" />
+
+                <Label text="Partner" />
+                <Input id="editPartnerInput" placeholder="Partner" />
+
+                <Label text="Location" />
+                <Select id="editLocationSelect">
+                    <core:Item key="NOORD" text="NOORD" />
+                    <core:Item key="ELLER" text="ELLER" />
+                    <core:Item key="VIADU" text="VIADU" />
+                    <core:Item key="LICHT" text="LICHT" />
+                </Select>
+
+                <CheckBox id="editFinishedCheckBox" text="Finished" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Save" press="onSaveEditedMovement" />
+            <Button text="Cancel" press="onCloseEditMovementDialog" />
+        </buttons>
+    </Dialog>
+
+    <!-- Confirm Delete Dialog Fragment -->
+    <Dialog id="confirmDeleteDialog" title="Confirm Delete">
+        <content>
+            <Text text="Are you sure you want to delete this movement?" />
+        </content>
+        <buttons>
+            <Button text="Yes" press="onConfirmDelete" />
+            <Button text="Cancel" press="onCloseConfirmDeleteDialog" />
+        </buttons>
+    </Dialog>
+
+    <!-- Add Item Dialog Fragment -->
+    <Dialog id="addItemDialog" title="Add Item">
+        <content>
+            <VBox>
+                <Label text="Movement ID" />
+                <Input id="itemMovIdInput" editable="false" />
+
+                <Label text="Item ID" />
+                <Input id="itemItemIdInput" placeholder="Item ID" />
+
+                <Label text="Material Number" />
+                <Input id="itemMatnrInput" placeholder="Material Number" />
+
+                <Label text="Quantity" />
+                <Input id="itemUmzizInput" placeholder="Quantity" />
+
+                <Label text="Unit" />
+                <Input id="itemMeinsInput" placeholder="Unit" />
+            </VBox>
+        </content>
+        <buttons>
+            <Button text="Create" press="onCreateItem" />
+            <Button text="Cancel" press="onCloseAddItemDialog" />
+        </buttons>
+    </Dialog>
+</mvc:View>
